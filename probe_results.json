@@ -2,12 +2,12 @@
   "business_connection": {
     "status": "✅ SUPPORTED",
     "notes": "Confirmed in Phase 3 — connect/disconnect both received",
-    "seen_at": "2026-08-13T21:36:18.553527+00:00"
+    "seen_at": "2026-08-13T23:03:07.528959+00:00"
   },
   "text_message": {
     "status": "✅ SUPPORTED",
     "notes": "text received, len=18",
-    "seen_at": "2026-08-13T21:36:18.919950+00:00"
+    "seen_at": "2026-08-13T23:03:07.884173+00:00"
   },
   "photo_message": {
     "status": "⏳ NOT YET SEEN",
@@ -67,12 +67,12 @@
   "edited_business_message": {
     "status": "✅ SUPPORTED",
     "notes": "edited message received: message_id=100, has_text=True, has_caption=False",
-    "seen_at": "2026-08-13T21:36:18.923063+00:00"
+    "seen_at": "2026-08-13T23:03:07.887481+00:00"
   },
   "deleted_business_messages": {
     "status": "✅ SUPPORTED",
     "notes": "deleted_business_messages received: count=2, fields=[business_connection_id, chat, message_ids]",
-    "seen_at": "2026-08-13T21:36:18.925294+00:00"
+    "seen_at": "2026-08-13T23:03:07.889751+00:00"
   },
   "has_media_spoiler_field": {
     "status": "⏳ NOT YET SEEN",
