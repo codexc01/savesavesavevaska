@@ -58,7 +58,7 @@ class TestAdminSecurityGuard:
             mock_settings.return_value.admin_id = 2106121176
             res = await filter_obj(msg)
             assert res is False
-            msg.answer.assert_not_called()
+            msg.answer.assert_called_once_with("⛔️ У вас нет прав доступа к админ-панели.")
 
 
 class TestAdminCommands:

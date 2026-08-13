@@ -67,9 +67,20 @@ async def _set_bot_commands(bot: Bot, admin_id: int) -> None:
 # Run modes
 # ---------------------------------------------------------------------------
 
+ALLOWED_UPDATES = [
+    "message",
+    "edited_message",
+    "callback_query",
+    "business_connection",
+    "business_message",
+    "edited_business_message",
+    "deleted_business_messages",
+]
+
+
 async def _run_polling(bot: Bot, dp: Dispatcher) -> None:
     logger.info("Starting in polling mode")
-    await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
+    await dp.start_polling(bot, allowed_updates=ALLOWED_UPDATES)
 
 
 async def _run_webhook(bot: Bot, dp: Dispatcher, settings: Settings) -> None:
@@ -86,7 +97,7 @@ async def _run_webhook(bot: Bot, dp: Dispatcher, settings: Settings) -> None:
     await bot.set_webhook(
         url=full_url,
         secret_token=settings.webhook_secret.get_secret_value() or None,
-        allowed_updates=dp.resolve_used_update_types(),
+        allowed_updates=ALLOWED_UPDATES,
         drop_pending_updates=True,
     )
     logger.info("Webhook set", url=full_url)
