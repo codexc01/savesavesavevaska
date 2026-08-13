@@ -74,8 +74,12 @@ async def _render_main_dashboard() -> tuple[str, InlineKeyboardMarkup]:
     """Render main dashboard status text and inline keyboard."""
     settings = get_settings()
     async with get_db_session() as session:
-        all_conns = await list_business_connections(session, active_only=True)
-        active_conns = [c for c in all_conns if c.is_enabled]
+        from app.database.models import BusinessConnectionModel
+
+        conn_count_stmt = select(func.count(BusinessConnectionModel.id)).where(
+            BusinessConnectionModel.is_enabled.is_(True)
+        )
+        active_count = (await session.execute(conn_count_stmt)).scalar() or 0
 
         # Count total stored messages
         msg_count_stmt = select(func.count(MessageModel.id))
@@ -85,7 +89,7 @@ async def _render_main_dashboard() -> tuple[str, InlineKeyboardMarkup]:
         "<b>⚙️ Админ-панель управления</b>\n\n"
         "<b>Статус:</b> 🟢 Онлайн\n"
         f"<b>Режим:</b> <code>{settings.bot_mode}</code>\n"
-        f"<b>Подключений:</b> {len(active_conns)} активных\n"
+        f"<b>Подключений:</b> {active_count} активных\n"
         f"<b>Сохранено сообщений:</b> {total_msgs}\n"
         f"<b>TTL кэша:</b> {settings.message_cache_ttl_days} дн.\n\n"
         "<i>Используйте кнопки меню ниже или команды /connections, /chats</i>"
