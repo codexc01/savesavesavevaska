@@ -1,0 +1,62 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: tg_save_postgres
+    restart: always
+    env_file: .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-savemod}
+      POSTGRES_USER: ${POSTGRES_USER:-savemod}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-savemod_pass}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-savemod} -d $${POSTGRES_DB:-savemod}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bot_net
+
+  redis:
+    image: redis:7-alpine
+    container_name: tg_save_redis
+    restart: always
+    env_file: .env
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bot_net
+
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tg_save_bot
+    restart: always
+    env_file: .env
+    environment:
+      POSTGRES_HOST: postgres
+      REDIS_HOST: redis
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - bot_net
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  bot_net:
+    driver: bridge

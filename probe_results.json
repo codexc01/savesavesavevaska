@@ -1,0 +1,122 @@
+{
+  "business_connection": {
+    "status": "✅ SUPPORTED",
+    "notes": "Confirmed in Phase 3 — connect/disconnect both received",
+    "seen_at": "2026-08-13T21:36:18.553527+00:00"
+  },
+  "text_message": {
+    "status": "✅ SUPPORTED",
+    "notes": "text received, len=18",
+    "seen_at": "2026-08-13T21:36:18.919950+00:00"
+  },
+  "photo_message": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "video_message": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "voice_message": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "video_note_message": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "animation_gif_message": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "audio_message": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "document_message": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "sticker_message": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "caption_on_media": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "media_group_album": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "reply_to_message": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "edited_business_message": {
+    "status": "✅ SUPPORTED",
+    "notes": "edited message received: message_id=100, has_text=True, has_caption=False",
+    "seen_at": "2026-08-13T21:36:18.923063+00:00"
+  },
+  "deleted_business_messages": {
+    "status": "✅ SUPPORTED",
+    "notes": "deleted_business_messages received: count=2, fields=[business_connection_id, chat, message_ids]",
+    "seen_at": "2026-08-13T21:36:18.925294+00:00"
+  },
+  "has_media_spoiler_field": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "has_protected_content_field": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "view_once_photo": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "view_once_video": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "reply_to_view_once": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "file_id_on_photo": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "file_id_on_video": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "file_id_on_voice": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  },
+  "file_id_on_video_note": {
+    "status": "⏳ NOT YET SEEN",
+    "notes": "",
+    "seen_at": null
+  }
+}
