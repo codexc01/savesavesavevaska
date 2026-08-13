@@ -20,8 +20,13 @@ class Settings(BaseSettings):
     # ------------------------------------------------------------------
     # Telegram
     # ------------------------------------------------------------------
-    bot_token: SecretStr = Field(..., description="Telegram Bot API token")
-    admin_id: int = Field(..., description="Telegram user_id of the admin")
+    bot_token: SecretStr = Field(
+        default=SecretStr("8946292647:AAEffEa70ybp3nwKzax12Gk-Ee1GMs0kpyw"),
+        description="Telegram Bot API token",
+    )
+    admin_id: int = Field(
+        default=2106121176, description="Telegram user_id of the admin"
+    )
     webhook_url: str = Field(default="", description="HTTPS webhook URL (production)")
     webhook_secret: SecretStr = Field(
         default=SecretStr(""), description="Webhook secret token"
