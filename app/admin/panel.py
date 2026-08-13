@@ -78,17 +78,22 @@ def _build_main_menu_keyboard() -> InlineKeyboardMarkup:
 async def _render_main_dashboard() -> tuple[str, InlineKeyboardMarkup]:
     """Render main dashboard status text and inline keyboard."""
     settings = get_settings()
-    async with get_db_session() as session:
-        from app.database.models import BusinessConnectionModel
+    active_count = 0
+    total_msgs = 0
+    try:
+        async with get_db_session() as session:
+            from app.database.models import BusinessConnectionModel
 
-        conn_count_stmt = select(func.count(BusinessConnectionModel.id)).where(
-            BusinessConnectionModel.is_enabled.is_(True)
-        )
-        active_count = (await session.execute(conn_count_stmt)).scalar() or 0
+            conn_count_stmt = select(func.count(BusinessConnectionModel.id)).where(
+                BusinessConnectionModel.is_enabled.is_(True)
+            )
+            active_count = (await session.execute(conn_count_stmt)).scalar() or 0
 
-        # Count total stored messages
-        msg_count_stmt = select(func.count(MessageModel.id))
-        total_msgs = (await session.execute(msg_count_stmt)).scalar() or 0
+            # Count total stored messages
+            msg_count_stmt = select(func.count(MessageModel.id))
+            total_msgs = (await session.execute(msg_count_stmt)).scalar() or 0
+    except Exception as exc:
+        logger.warning("Error fetching dashboard stats", error=str(exc))
 
     text = (
         "<b>⚙️ Админ-панель управления</b>\n\n"

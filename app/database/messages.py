@@ -106,7 +106,25 @@ async def get_message(
         )
     )
     res = await session.execute(stmt)
-    return res.scalar_one_or_none()
+    msg = res.scalar_one_or_none()
+    if msg is None:
+        # Fallback search by chat_id & message_id
+        fb_stmt = (
+            select(MessageModel)
+            .options(
+                selectinload(MessageModel.versions),
+                selectinload(MessageModel.media_item),
+            )
+            .where(
+                MessageModel.chat_id == chat_id,
+                MessageModel.message_id == message_id,
+            )
+            .order_by(MessageModel.created_at.desc())
+        )
+        res_fb = await session.execute(fb_stmt)
+        msg = res_fb.scalars().first()
+
+    return msg
 
 
 get_message_by_chat_and_id = get_message
